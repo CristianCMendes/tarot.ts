@@ -57,53 +57,59 @@ export function DrawCardPage() {
         import('../cards/arcanosMaiores.json').then(x => setCards(x.default))
     }, []);
 
-    return (<Grid container>
-            <Grid size={12}>
-                <Grid container>
-                    <Grid size={{sm: 8, xs: 12}}>
-                        <TextField fullWidth value={questao} onChange={e => setQuestao(e.target.value)}
-                                   label={"Questao/Pergunta"}/>
-                    </Grid>
-                    <Grid size={{sm: 2, xs: 4}}>
-                        <TextField value={count} type={'number'}
-                                   onChange={e => setCount(Math.min(parseInt(e.target.value), 7))}
-                                   label={"Quantidade"}/>
-                    </Grid>
-                    <Grid size={{sm: 2, xs: 8}}>
-                        <Button size={'small'} variant={'outlined'} fullWidth sx={{height: '100%'}} endIcon={<AddCard/>}
-                                onClick={handleGiro}>
-                            Girar Carta(s)
-                        </Button>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid size={12}>
-                <Grid container>
-                    <Grid size={12}>
-                        <Button disabled={myCards.length == 0} endIcon={<Assistant/>}
-                                fullWidth variant={'outlined'}
-                                onClick={requestAiDefinition}
-                                loading={aiLoading}>Solicitar
-                            definição de IA (Gemini)</Button>
+    return (
+        <Grid size={12}>
+            <Grid container>
+                <Grid size={12}>
+                    <Grid container>
+                        <Grid size={{sm: 8, xs: 12}}>
+                            <TextField fullWidth value={questao} onChange={e => setQuestao(e.target.value)}
+                                       label={"Questao/Pergunta"}/>
+                        </Grid>
+                        <Grid size={{sm: 2, xs: 4}}>
+                            <TextField value={count} type={'number'}
+                                       onChange={e => setCount(Math.min(parseInt(e.target.value), 7))}
+                                       label={"Quantidade"}/>
+                        </Grid>
+                        <Grid size={{sm: 2, xs: 8}}>
+                            <Button size={'small'} variant={'outlined'} fullWidth sx={{height: '100%'}}
+                                    endIcon={<AddCard/>}
+                                    onClick={handleGiro}>
+                                Girar Carta(s)
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-            {aiText != '' && <Grid size={12}>
-                <Grid container>
-                    <Grid>
-                        <Typography>Definição por IA:</Typography>
-                        {aiText.split("<br/>").map((chunk) => {
-                            return <Typography>{chunk}</Typography>
-                        })}
+                <Grid size={12}>
+                    <Grid container>
+                        <Grid size={12}>
+                            <Button disabled={myCards.length == 0} endIcon={<Assistant/>}
+                                    fullWidth variant={'outlined'}
+                                    onClick={requestAiDefinition}
+                                    loading={aiLoading}>Solicitar
+                                definição de IA (Gemini)</Button>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>}
-            <Grid container justifyContent={'center'} spacing={2} mt={1}>
-                {myCards.map((myCard) => (
-                    <Grid size={{sm: 4, lg: 3}}>
-                        <CardComponent card={myCard}/>
+                {aiText != '' && <Grid size={12}>
+                    <Grid container>
+                        <Grid>
+                            <Typography>Definição por IA:</Typography>
+                            {aiText.split("<br/>").map((chunk) => {
+                                return <Typography>{chunk}</Typography>
+                            })}
+                        </Grid>
                     </Grid>
-                ))}
+                </Grid>}
+                <Grid size={12}>
+                    <Grid container justifyContent={'center'} spacing={2} mt={1}>
+                        {myCards.map((myCard) => (
+                            <Grid size={{sm: 4, lg: 3}}>
+                                <CardComponent card={myCard}/>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     )
