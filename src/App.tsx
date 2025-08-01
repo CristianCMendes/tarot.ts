@@ -7,7 +7,7 @@ function App() {
             <Grid container component={Paper} elevation={2}>
                 <AppHeader/>
             </Grid>
-            <Grid container component={Paper} m={3} mt={5} p={2}>
+            <Grid container component={Paper} m={3} mt={7} p={2}>
                     <DrawCardPage/>
             </Grid>
         </Grid>
