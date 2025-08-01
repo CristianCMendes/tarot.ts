@@ -1,7 +1,14 @@
 {
   "name": "tarot.client",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "1.0.0",
+  "author": {
+    "name": "Cristian Cardoso Mendes",
+    "url": "https://www.linkedin.com/in/cristian-cardoso-mendes-b29a5216b/",
+    "email": "dontetb288@gmail.com"
+  },
+  "readme": "README.md",
+  "repository": "https://github.com/CristianCMendes/tarot.ts/",
   "type": "module",
   "scripts": {
     "dev": "vite",
