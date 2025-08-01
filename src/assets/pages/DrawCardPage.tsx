@@ -31,13 +31,20 @@ export function DrawCardPage() {
 
     const requestAiDefinition = () => {
         setAiText('')
+        setAiLoading(true)
         ai.models.generateContent({
             model: "gemini-1.5-flash",
             contents: [{
                 "parts": [{
-                    "text": `O usuario está tentando descobrir o significado de um conjunto de cartas, Questao: ${questao} : ${JSON.stringify(myCards)}`
-                }]
+                    "text": `O usuario está tentando descobrir o significado de um conjunto de cartas, Questao: ${questao} você deve ser o mais claro possivel`
+                },{
+                    text: " * " + myCards.map(x => x.nome).join(" * ")
+                },
+                    {text: "Adicione um <br/> sempre que for quebrar linha, quebre linha sempre que for falar de uma carta,"}],
             }],
+            config: {
+                temperature: 0.25
+            }
         }).then(x => {
             setAiText(x.text ?? "")
         }).finally(() => {
@@ -72,8 +79,9 @@ export function DrawCardPage() {
             <Grid size={12}>
                 <Grid container>
                     <Grid>
-                        <Button disabled={myCards.length == 0} onClick={requestAiDefinition} loading={aiLoading}>Solicitar
-                            definição da IA</Button>
+                        <Button disabled={myCards.length == 0}
+                                onClick={requestAiDefinition} loading={aiLoading}>Solicitar
+                            definição da IA(Gemini)</Button>
                     </Grid>
                 </Grid>
             </Grid>
@@ -81,7 +89,9 @@ export function DrawCardPage() {
                 <Grid container>
                     <Grid>
                         <Typography>Definição por IA:</Typography>
-                        <Typography>{aiText}</Typography>
+                        {aiText.split("<br/>").map((chunk) => {
+                            return <Typography>{chunk}</Typography>
+                        })}
                     </Grid>
                 </Grid>
             </Grid>}
