@@ -11,7 +11,7 @@ export function DrawCardPage() {
     const [count, setCount] = useState(1);
     const [aiText, setAiText] = useState("");
     const [aiLoading, setAiLoading] = useState(false);
-    const ai = new GoogleGenAI({});
+    const ai = new GoogleGenAI({apiKey: import.meta.env.GEMINI_API_KEY});
 
     const handleGiro = () => {
         setMyCards([]);
