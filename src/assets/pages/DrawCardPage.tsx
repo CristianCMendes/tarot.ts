@@ -1,13 +1,17 @@
-import {Button, Grid, TextField} from "@mui/material";
+import {Button, Grid, TextField, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 import type {ICard} from "../models/ICard.ts";
 import {CardComponent} from "../components/CardComponent.tsx";
+import {GoogleGenAI} from "@google/genai";
 
 export function DrawCardPage() {
     const [cards, setCards] = useState<ICard[]>([]);
     const [myCards, setMyCards] = useState<ICard[]>([]);
     const [questao, setQuestao] = useState("");
     const [count, setCount] = useState(1);
+    const [aiText, setAiText] = useState("");
+    const [aiLoading, setAiLoading] = useState(false);
+    const ai = new GoogleGenAI({});
 
     const handleGiro = () => {
         setMyCards([]);
@@ -23,6 +27,22 @@ export function DrawCardPage() {
             cardsDisponiveis.splice(randomIndex, 1);
             setMyCards(x => [...x, cardSelecionada]);
         }
+    }
+
+    const requestAiDefinition = () => {
+        setAiText('')
+        ai.models.generateContent({
+            model: "gemini-1.5-flash",
+            contents: [{
+                "parts": [{
+                    "text": `O usuario está tentando descobrir o significado de um conjunto de cartas, Questao: ${questao} : ${JSON.stringify(myCards)}`
+                }]
+            }],
+        }).then(x => {
+            setAiText(x.text ?? "")
+        }).finally(() => {
+            setAiLoading(false)
+        })
     }
 
     useEffect(() => {
@@ -49,6 +69,22 @@ export function DrawCardPage() {
                     </Grid>
                 </Grid>
             </Grid>
+            <Grid size={12}>
+                <Grid container>
+                    <Grid>
+                        <Button disabled={myCards.length == 0} onClick={requestAiDefinition} loading={aiLoading}>Solicitar
+                            definição da IA</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+            {aiText != '' && <Grid size={12}>
+                <Grid container>
+                    <Grid>
+                        <Typography>Definição por IA:</Typography>
+                        <Typography>{aiText}</Typography>
+                    </Grid>
+                </Grid>
+            </Grid>}
             <Grid container justifyContent={'center'} spacing={2} mt={1}>
                 {myCards.map((myCard) => (
                     <Grid size={{sm: 4, lg: 3}}>
