@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import type {ICard} from "../models/ICard.ts";
 import {CardComponent} from "../components/CardComponent.tsx";
 import {GoogleGenAI} from "@google/genai";
+import {AddCard, Assistant} from "@mui/icons-material";
 
 export function DrawCardPage() {
     const [cards, setCards] = useState<ICard[]>([]);
@@ -37,7 +38,7 @@ export function DrawCardPage() {
             contents: [{
                 "parts": [{
                     "text": `O usuario está tentando descobrir o significado de um conjunto de cartas, Questao: ${questao} você deve ser o mais claro possivel`
-                },{
+                }, {
                     text: " * " + myCards.map(x => x.nome).join(" * ")
                 },
                     {text: "Adicione um <br/> sempre que for quebrar linha, quebre linha sempre que for falar de uma carta,"}],
@@ -59,17 +60,17 @@ export function DrawCardPage() {
     return (<Grid container>
             <Grid size={12}>
                 <Grid container>
-                    <Grid size={'grow'}>
+                    <Grid size={{sm: 8, xs: 12}}>
                         <TextField fullWidth value={questao} onChange={e => setQuestao(e.target.value)}
                                    label={"Questao/Pergunta"}/>
                     </Grid>
-                    <Grid size={{sm: 2, xs: 3}}>
+                    <Grid size={{sm: 2, xs: 4}}>
                         <TextField value={count} type={'number'}
                                    onChange={e => setCount(Math.min(parseInt(e.target.value), 7))}
                                    label={"Quantidade"}/>
                     </Grid>
-                    <Grid size={{sm: 2, xs: 4}}>
-                        <Button size={'small'} variant={'outlined'} fullWidth sx={{height: '100%'}}
+                    <Grid size={{sm: 2, xs: 8}}>
+                        <Button size={'small'} variant={'outlined'} fullWidth sx={{height: '100%'}} endIcon={<AddCard/>}
                                 onClick={handleGiro}>
                             Girar Carta(s)
                         </Button>
@@ -78,10 +79,12 @@ export function DrawCardPage() {
             </Grid>
             <Grid size={12}>
                 <Grid container>
-                    <Grid>
-                        <Button disabled={myCards.length == 0}
-                                onClick={requestAiDefinition} loading={aiLoading}>Solicitar
-                            definição da IA(Gemini)</Button>
+                    <Grid size={12}>
+                        <Button disabled={myCards.length == 0} endIcon={<Assistant/>}
+                                fullWidth variant={'outlined'}
+                                onClick={requestAiDefinition}
+                                loading={aiLoading}>Solicitar
+                            definição de IA (Gemini)</Button>
                     </Grid>
                 </Grid>
             </Grid>
