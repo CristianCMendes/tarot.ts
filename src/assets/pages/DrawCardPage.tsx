@@ -36,13 +36,14 @@ export function DrawCardPage() {
                         <TextField fullWidth value={questao} onChange={e => setQuestao(e.target.value)}
                                    label={"Questao/Pergunta"}/>
                     </Grid>
-                    <Grid size={2}>
+                    <Grid size={{sm: 2, xs: 3}}>
                         <TextField value={count} type={'number'}
                                    onChange={e => setCount(Math.min(parseInt(e.target.value), 7))}
                                    label={"Quantidade"}/>
                     </Grid>
-                    <Grid size={2}>
-                        <Button variant={'outlined'} fullWidth sx={{height: '100%'}} onClick={handleGiro}>
+                    <Grid size={{sm: 2, xs: 4}}>
+                        <Button size={'small'} variant={'outlined'} fullWidth sx={{height: '100%'}}
+                                onClick={handleGiro}>
                             Girar Carta(s)
                         </Button>
                     </Grid>
@@ -50,7 +51,7 @@ export function DrawCardPage() {
             </Grid>
             <Grid container justifyContent={'center'} spacing={2} mt={1}>
                 {myCards.map((myCard) => (
-                    <Grid size={3.5}>
+                    <Grid size={{sm: 4, lg: 3}}>
                         <CardComponent card={myCard}/>
                     </Grid>
                 ))}
