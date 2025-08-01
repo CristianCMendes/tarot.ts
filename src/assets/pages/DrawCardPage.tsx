@@ -9,7 +9,7 @@ export function DrawCardPage() {
     const [cards, setCards] = useState<ICard[]>([]);
     const [myCards, setMyCards] = useState<ICard[]>([]);
     const [questao, setQuestao] = useState("");
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(3);
     const [aiText, setAiText] = useState("");
     const [aiLoading, setAiLoading] = useState(false);
     const ai = new GoogleGenAI({apiKey: import.meta.env.VITE_GEMINI_API_KEY});
@@ -61,15 +61,15 @@ export function DrawCardPage() {
         <Grid size={12}>
             <Grid container>
                 <Grid size={12}>
-                    <Grid container>
+                    <Grid container rowSpacing={1.5}>
                         <Grid size={{sm: 8, xs: 12}}>
                             <TextField fullWidth value={questao} onChange={e => setQuestao(e.target.value)}
                                        label={"Questao/Pergunta"}/>
                         </Grid>
                         <Grid size={{sm: 2, xs: 4}}>
-                            <TextField value={count} type={'number'}
-                                       onChange={e => setCount(Math.min(parseInt(e.target.value), 7))}
-                                       label={"Quantidade"}/>
+                            <TextField value={count} type={'number'} fullWidth
+                                       onChange={e => setCount(Math.max(Math.min(parseInt(e.target.value), 7), 1))}
+                                       label={"Cartas"}/>
                         </Grid>
                         <Grid size={{sm: 2, xs: 8}}>
                             <Button size={'small'} variant={'outlined'} fullWidth sx={{height: '100%'}}
@@ -78,10 +78,6 @@ export function DrawCardPage() {
                                 Girar Carta(s)
                             </Button>
                         </Grid>
-                    </Grid>
-                </Grid>
-                <Grid size={12}>
-                    <Grid container>
                         <Grid size={12}>
                             <Button disabled={myCards.length == 0} endIcon={<Assistant/>}
                                     fullWidth variant={'outlined'}
