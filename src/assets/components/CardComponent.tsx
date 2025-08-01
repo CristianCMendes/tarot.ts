@@ -24,11 +24,11 @@ export function CardComponent(props: CardComponentProps) {
     } : {};
 
     return (<Card variant={'outlined'}>
-        <CardMedia component={"img"} image={img} style={{...invertidoSx}}>
+        <CardMedia component={"img"} sx={{maxHeight: 300}} image={img} style={{...invertidoSx}}>
         </CardMedia>
         <CardContent>
             <Typography>{card.nome}{card.invertido ? "(Invertida)" : ""}</Typography>
-
+            <Typography>{card.invertido ? card.descricao_invertida : card.descricao}</Typography>
         </CardContent>
     </Card>)
 }
