@@ -1,0 +1,156 @@
+﻿[
+  {
+    "numero": 0,
+    "nome": "O Louco",
+    "descricao": "Representa novos começos, espontaneidade, espírito livre, aventura, fé no desconhecido, inocência e o potencial ilimitado. É a carta que inicia a jornada do herói, sem amarras e pronto para qualquer coisa que venha pela frente.",
+    "descricao_invertida": "Indica imprudência, riscos desnecessários, falta de planejamento, irresponsabilidade, distração, caos e a necessidade de pensar antes de agir. Pode sugerir que você está se precipitando ou ignorando avisos importantes.",
+    "interpretacao": "Em uma leitura, O Louco pode estar te chamando para dar um salto de fé, se libertar de convenções ou embarcar em uma nova aventura. Invertido, ele te alerta para os perigos da impulsividade e te convida a ser mais cauteloso."
+  },
+  {
+    "numero": 1,
+    "nome": "O Mago",
+    "descricao": "Simboliza o poder da manifestação, habilidade, iniciativa, comunicação, foco e a capacidade de transformar ideias em realidade. Ele tem todas as ferramentas à sua disposição e sabe como usá-las.",
+    "descricao_invertida": "Pode indicar manipulação, ilusão, falta de foco, talentos não utilizados, engano ou a necessidade de ser mais autêntico. Alerta para o uso indevido do poder ou para a falta de confiança nas próprias habilidades.",
+    "interpretacao": "O Mago sugere que você tem tudo o que precisa para alcançar seus objetivos. É hora de agir, usar suas habilidades e se comunicar com clareza. Invertido, ele te chama a atenção para a desonestidade (sua ou de outros) ou para a procrastinação."
+  },
+  {
+    "numero": 2,
+    "nome": "A Papisa / A Sacerdotisa",
+    "descricao": "Representa a intuição, o mistério, o conhecimento oculto, a sabedoria interior, a paciência, a passividade e a necessidade de escutar a voz da alma. Ela guarda segredos e verdades profundas.",
+    "descricao_invertida": "Indica segredos revelados, intuição bloqueada, superficialidade, verdades ocultas ou a necessidade de confrontar a realidade. Pode sugerir que você está ignorando sua voz interior ou que informações importantes estão sendo retidas.",
+    "interpretacao": "A Papisa te convida a confiar na sua intuição, a buscar conhecimento interior e a ser paciente. Invertida, ela te alerta para a necessidade de ser mais aberto ou para a dificuldade em acessar sua sabedoria interna."
+  },
+  {
+    "numero": 3,
+    "nome": "A Imperatriz",
+    "descricao": "Simboliza a fertilidade, a criatividade, a abundância, a natureza, a nutrição, a beleza, a sensualidade e a maternidade. Ela representa a manifestação da vida e a conexão com o lado feminino e produtivo.",
+    "descricao_invertida": "Pode indicar bloqueios criativos, infertilidade (literal ou figurada), dependência, negligência, falta de harmonia ou excesso de materialismo. Alerta para a dificuldade em se conectar com a própria essência criativa ou para problemas nos relacionamentos.",
+    "interpretacao": "A Imperatriz sugere um período de crescimento, criatividade e abundância. É hora de nutrir seus projetos e relacionamentos. Invertida, ela te chama a atenção para a necessidade de cuidar mais de si ou de desbloquear sua energia criativa."
+  },
+  {
+    "numero": 4,
+    "nome": "O Imperador",
+    "descricao": "Representa a autoridade, a estrutura, o controle, a disciplina, a estabilidade, a liderança, a paternidade e a realização de planos. Ele traz ordem e segurança.",
+    "descricao_invertida": "Indica tirania, autoritarismo, falta de controle, rigidez, abuso de poder, imaturidade ou a necessidade de ser mais flexível. Pode sugerir um pai ausente ou dominador, ou a dificuldade em assumir responsabilidades.",
+    "interpretacao": "O Imperador te convida a assumir o controle, a estabelecer limites e a ser disciplinado. É hora de construir bases sólidas. Invertido, ele te alerta para a necessidade de equilibrar poder e flexibilidade, ou para a rebeldia contra a autoridade."
+  },
+  {
+    "numero": 5,
+    "nome": "O Papa / O Hierofante",
+    "descricao": "Simboliza a tradição, a sabedoria espiritual, a fé, a moral, a educação, a conformidade e a busca por orientação. Ele representa a ponte entre o divino e o terreno, e a importância dos valores estabelecidos.",
+    "descricao_invertida": "Pode indicar rebelião, dogmatismo, falsos conselhos, crenças limitantes, não conformidade ou a necessidade de questionar a autoridade. Alerta para a hipocrisia ou para a dificuldade em encontrar um caminho espiritual autêntico.",
+    "interpretacao": "O Papa sugere a busca por conhecimento espiritual, a adesão a valores morais ou a orientação de um mentor. Invertido, ele te chama a atenção para a necessidade de encontrar sua própria verdade ou para a rigidez de certas doutrinas."
+  },
+  {
+    "numero": 6,
+    "nome": "Os Enamorados",
+    "descricao": "Representa escolhas, decisões importantes, relacionamentos, união, harmonia, amor e a necessidade de alinhar valores. É a carta da dualidade e da livre escolha.",
+    "descricao_invertida": "Indica desarmonia, conflitos, indecisão, separação, escolhas erradas ou a necessidade de resolver dilemas. Pode sugerir um relacionamento problemático ou a dificuldade em se comprometer.",
+    "interpretacao": "Os Enamorados te convidam a fazer uma escolha consciente e a alinhar-se com seus verdadeiros desejos. É hora de se comprometer com o que realmente importa. Invertido, ele te alerta para a indecisão ou para conflitos em relacionamentos."
+  },
+  {
+    "numero": 7,
+    "nome": "O Carro",
+    "descricao": "Simboliza o triunfo, a vitória, o controle, a determinação, o avanço, a superação de obstáculos e a jornada bem-sucedida. Ele representa a vontade de seguir em frente e conquistar seus objetivos.",
+    "descricao_invertida": "Pode indicar falta de controle, derrota, direção errada, acidentes, arrogância, impulsividade ou a necessidade de reavaliar o caminho. Alerta para a perda de foco ou para a dificuldade em lidar com o sucesso.",
+    "interpretacao": "O Carro sugere um período de sucesso, avanço e controle sobre sua vida. É hora de seguir em frente com confiança. Invertido, ele te chama a atenção para a necessidade de retomar o controle ou de reavaliar seus objetivos."
+  },
+  {
+    "numero": 8,
+    "nome": "A Justiça",
+    "descricao": "Representa o equilíbrio, a verdade, a imparcialidade, a lei, a responsabilidade, a causa e efeito e a necessidade de tomar decisões justas. Ela busca a harmonia e a equidade.",
+    "descricao_invertida": "Indica injustiça, desequilíbrio, preconceito, irresponsabilidade, falsidade ou a necessidade de enfrentar as consequências de suas ações. Pode sugerir problemas legais ou a dificuldade em ser honesto consigo mesmo.",
+    "interpretacao": "A Justiça te convida a agir com integridade, a ser imparcial e a buscar a verdade. É hora de equilibrar as coisas. Invertida, ela te alerta para a injustiça ou para a necessidade de assumir responsabilidades."
+  },
+  {
+    "numero": 9,
+    "nome": "O Eremita",
+    "descricao": "Simboliza a introspecção, a sabedoria, a busca interior, a solidão, a autoconsciência, a meditação e a necessidade de se afastar do mundo para encontrar respostas. Ele é o guia que ilumina o próprio caminho.",
+    "descricao_invertida": "Pode indicar isolamento excessivo, solidão, teimosia, ignorância, medo de buscar ajuda ou a necessidade de se reconectar com os outros. Alerta para a fuga da realidade ou para a dificuldade em compartilhar sua sabedoria.",
+    "interpretacao": "O Eremita sugere um período de reflexão, autoconhecimento e busca por respostas internas. É hora de se recolher e meditar. Invertido, ele te chama a atenção para o isolamento excessivo ou para a necessidade de buscar orientação externa."
+  },
+  {
+    "numero": 10,
+    "nome": "A Roda da Fortuna",
+    "descricao": "Representa o destino, o ciclo da vida, as mudanças, as oportunidades, a sorte e os altos e baixos. Ela simboliza o movimento constante e a imprevisibilidade da vida.",
+    "descricao_invertida": "Indica má sorte, reviravoltas negativas, estagnação, falta de controle, atrasos ou a necessidade de se adaptar às mudanças. Pode sugerir que você está resistindo ao fluxo da vida ou que não está aproveitando as oportunidades.",
+    "interpretacao": "A Roda da Fortuna sugere um período de mudanças e novas oportunidades. É hora de aproveitar o momento e se adaptar. Invertida, ela te alerta para a estagnação ou para a necessidade de aceitar o que não pode ser controlado."
+  },
+  {
+    "numero": 11,
+    "nome": "A Força",
+    "descricao": "Simboliza a coragem, a paciência, a compaixão, o controle sobre os instintos, a força interior, a determinação e a capacidade de dominar desafios com gentileza. Ela representa a força moral e a resiliência.",
+    "descricao_invertida": "Pode indicar fraqueza, medo, falta de autocontrole, agressividade, insegurança ou a necessidade de encontrar sua força interior. Alerta para a tirania dos instintos ou para a dificuldade em lidar com a própria sombra.",
+    "interpretacao": "A Força te convida a usar sua coragem, paciência e compaixão para superar desafios. É hora de dominar seus medos. Invertida, ela te chama a atenção para a falta de confiança ou para a necessidade de controlar impulsos."
+  },
+  {
+    "numero": 12,
+    "nome": "O Enforcado",
+    "descricao": "Representa o sacrifício, a suspensão, a nova perspectiva, a rendição, a introspecção e a necessidade de ver as coisas de um ângulo diferente. Ele simboliza a pausa para a iluminação.",
+    "descricao_invertida": "Indica martírio, teimosia, sacrifício inútil, indecisão, resistência à mudança ou a necessidade de se libertar de situações estagnadas. Alerta para a dificuldade em se desapegar ou para a vitimização.",
+    "interpretacao": "O Enforcado sugere um período de suspensão e sacrifício para ganhar uma nova perspectiva. É hora de se render ao processo. Invertido, ele te alerta para a resistência à mudança ou para a necessidade de agir."
+  },
+  {
+    "numero": 13,
+    "nome": "A Morte",
+    "descricao": "Simboliza a transformação, o fim de um ciclo, o renascimento, a mudança radical, a libertação e a necessidade de deixar o passado para trás. Ela representa o inevitável fim que precede um novo começo.",
+    "descricao_invertida": "Pode indicar resistência à mudança, estagnação, medo do desconhecido, perda, luto prolongado ou a necessidade de aceitar o fim. Alerta para a dificuldade em se desapegar ou para a negação da realidade.",
+    "interpretacao": "A Morte sugere uma grande transformação em sua vida, o fim de algo para o início de algo novo. É hora de abraçar a mudança. Invertida, ela te alerta para a resistência à transformação ou para a dificuldade em seguir em frente."
+  },
+  {
+    "numero": 14,
+    "nome": "A Temperança",
+    "descricao": "Representa o equilíbrio, a moderação, a harmonia, a paciência, a cura, a adaptação e a fusão de opostos. Ela simboliza a capacidade de encontrar o ponto ideal e a serenidade.",
+    "descricao_invertida": "Indica desequilíbrio, excessos, impaciência, desarmonia, conflitos ou a necessidade de encontrar o centro. Alerta para a falta de moderação ou para a dificuldade em se adaptar.",
+    "interpretacao": "A Temperança te convida a buscar o equilíbrio em todas as áreas da sua vida, a ser paciente e a encontrar a moderação. Invertida, ela te alerta para o desequilíbrio ou para a necessidade de ser mais flexível."
+  },
+  {
+    "numero": 15,
+    "nome": "O Diabo",
+    "descricao": "Simboliza a tentação, a escravidão (vícios, medos), o materialismo, a obsessão, a sexualidade e a necessidade de confrontar as sombras. Ele representa as amarras que nos prendem.",
+    "descricao_invertida": "Pode indicar libertação, superação de vícios, desapego, autoconsciência, revelação de segredos ou a necessidade de enfrentar a própria sombra. Alerta para a ilusão de liberdade ou para a dificuldade em se libertar.",
+    "interpretacao": "O Diabo sugere que você está preso a algo (vício, medo, crença limitante) e precisa se libertar. É hora de confrontar suas sombras. Invertido, ele te chama a atenção para a libertação dessas amarras ou para a necessidade de reconhecer seu poder pessoal."
+  },
+  {
+    "numero": 16,
+    "nome": "A Torre",
+    "descricao": "Representa a destruição, a revelação, o colapso, a mudança súbita, a libertação de estruturas antigas e a quebra de ilusões. Ela simboliza a verdade que derruba o que não serve mais.",
+    "descricao_invertida": "Indica desastre evitado, mudança adiada, medo da destruição, resistência à mudança ou a necessidade de reconstruir. Alerta para a dificuldade em lidar com o caos ou para a negação da realidade.",
+    "interpretacao": "A Torre sugere uma mudança drástica e inesperada que pode ser dolorosa, mas necessária para a sua libertação. É hora de reconstruir. Invertida, ela te alerta para a resistência à mudança ou para a necessidade de aceitar o inevitável."
+  },
+  {
+    "numero": 17,
+    "nome": "A Estrela",
+    "descricao": "Simboliza a esperança, a inspiração, a cura, a renovação, a serenidade, a conexão com o divino e a fé no futuro. Ela representa a luz que guia e a promessa de um novo começo.",
+    "descricao_invertida": "Pode indicar falta de esperança, desânimo, desconexão, pessimismo, oportunidades perdidas ou a necessidade de reencontrar a fé. Alerta para a ilusão ou para a dificuldade em confiar no processo.",
+    "interpretacao": "A Estrela sugere um período de esperança, inspiração e cura. É hora de ter fé e seguir seus sonhos. Invertida, ela te chama a atenção para o desânimo ou para a necessidade de se reconectar com sua essência."
+  },
+  {
+    "numero": 18,
+    "nome": "A Lua",
+    "descricao": "Representa a intuição, o inconsciente, os sonhos, as ilusões, os medos ocultos, os mistérios e a necessidade de explorar o lado sombrio. Ela simboliza a jornada através do desconhecido.",
+    "descricao_invertida": "Indica clareza, revelação de segredos, medos superados, ilusões desfeitas, intuição bloqueada ou a necessidade de confrontar a verdade. Alerta para a confusão ou para a dificuldade em confiar na intuição.",
+    "interpretacao": "A Lua sugere um período de incerteza, ilusões e a necessidade de confiar na sua intuição. É hora de explorar seu inconsciente. Invertida, ela te alerta para a confusão ou para a necessidade de buscar a clareza."
+  },
+  {
+    "numero": 19,
+    "nome": "O Sol",
+    "descricao": "Simboliza a alegria, o sucesso, a vitalidade, a clareza, a iluminação, a verdade, a realização e a felicidade. Ele representa a luz que dissipa as sombras e traz a plenitude.",
+    "descricao_invertida": "Pode indicar falta de entusiasmo, pessimismo, sucesso adiado, egoísmo, vaidade ou a necessidade de encontrar a alegria. Alerta para a dificuldade em brilhar ou para a negação da própria luz.",
+    "interpretacao": "O Sol sugere um período de grande sucesso, alegria e clareza. É hora de brilhar e celebrar suas conquistas. Invertido, ele te chama a atenção para a falta de vitalidade ou para a necessidade de ser mais otimista."
+  },
+  {
+    "numero": 20,
+    "nome": "O Julgamento",
+    "descricao": "Representa o renascimento, a avaliação, o perdão, a redenção, a chamada para um propósito maior e a necessidade de se libertar do passado. Ele simboliza a ressurreição e a prestação de contas.",
+    "descricao_invertida": "Indica auto-condenação, culpa, medo do julgamento, indecisão, atrasos ou a necessidade de perdoar a si mesmo. Alerta para a dificuldade em seguir em frente ou para a negação da verdade.",
+    "interpretacao": "O Julgamento sugere um momento de avaliação, perdão e um chamado para um novo propósito. É hora de se libertar do passado. Invertido, ele te alerta para a auto-condenação ou para a necessidade de aceitar suas responsabilidades."
+  },
+  {
+    "numero": 21,
+    "nome": "O Mundo",
+    "descricao": "Simboliza a conclusão, a totalidade, a realização, a integração, o sucesso, a plenitude e a celebração. É a carta do ciclo completo e da união de todas as partes.",
+    "descricao_invertida": "Pode indicar incompletude, atrasos, falta de realização, estagnação, medo de concluir ou a necessidade de encontrar seu lugar no mundo. Alerta para a dificuldade em alcançar a plenitude ou para a resistência ao fim de um ciclo.",
+    "interpretacao": "O Mundo sugere a conclusão de um ciclo, a realização de um grande objetivo e a sensação de plenitude. É hora de celebrar suas conquistas. Invertido, ele te alerta para a incompletude ou para a necessidade de persistir para alcançar a totalidade."
+  }
+]
