@@ -34,7 +34,7 @@ export function DrawCardPage() {
         setAiText('')
         setAiLoading(true)
         ai.models.generateContent({
-            model: "gemini-1.5-flash",
+            model: "gemini-2.5-flash-lite",
             contents: [{
                 "parts": [{
                     "text": `O usuario está tentando descobrir o significado de um conjunto de cartas, Questao: ${questao} você deve ser o mais claro possivel`
