@@ -6,8 +6,8 @@ descrições e significados detalhados.
 ## Tecnologias Utilizadas
 
 - React 19.1.1
-- TypeScript 5.8.3 (apenas para o build)
-- TypeScript/native-preview 
+- TypeScript 5.9.3 (apenas para o build)
+- TypeScript/native-preview
 - Material-UI (MUI) 7.2.0
 - React Router DOM 7.7.1 (não utilizado oficialmente, porém instalado para fins futuros...)
 - Vite 7.0.6
@@ -27,3 +27,6 @@ descrições e significados detalhados.
    VITE_GEMINI_API_KEY=SUA_CHAVE)
 4. Inicie o projeto: npm run dev
 5. Divirta-se
+
+Nota: caso deseje definir um modelo para usar com o gemini defina usando as variaveis: VITE_GEMINI_MODEL_TEXT e
+VITE_GEMINI_MODEL_IMAGE

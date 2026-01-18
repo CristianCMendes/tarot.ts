@@ -1,7 +1,7 @@
 {
   "name": "tarot.client",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.3",
   "author": {
     "name": "Cristian Cardoso Mendes",
     "url": "https://www.linkedin.com/in/cristian-cardoso-mendes-b29a5216b/",
@@ -19,29 +19,29 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@fontsource/roboto": "^5.2.6",
-    "@google/genai": "^1.12.0",
-    "@mui/icons-material": "^7.2.0",
-    "@mui/material": "^7.2.0",
-    "@vercel/analytics": "^1.5.0",
-    "@vercel/speed-insights": "^1.2.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-router-dom": "^7.7.1"
+    "@fontsource/roboto": "^5.2.9",
+    "@google/genai": "~1.37.0",
+    "@mui/icons-material": "^7.3.7",
+    "@mui/material": "^7.3.7",
+    "@vercel/analytics": "^1.6.1",
+    "@vercel/speed-insights": "^1.3.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-router-dom": "^7.12.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.32.0",
-    "@types/node": "^24",
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
-    "@typescript/native-preview": "^7.0.0-dev.20250729.2",
-    "@vitejs/plugin-react": "^4.7.0",
-    "eslint": "^9.32.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.3.0",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.38.0",
-    "vite": "^7.0.6"
+    "@eslint/js": "^9.39.2",
+    "@types/node": "^25",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
+    "@typescript/native-preview": "^7.0.0-dev.20260118.1",
+    "@vitejs/plugin-react": "^5.1.2",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.26",
+    "globals": "^17.0.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.53.0",
+    "vite": "^7.3.1"
   }
 }
