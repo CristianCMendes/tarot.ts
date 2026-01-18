@@ -16,14 +16,14 @@ import {AddCard, Assistant, AutoAwesome} from "@mui/icons-material";
 
 type ITarotResponse = {
 	data: {
-		title: string,
+		archetype: string,
 		resume: string,
 		detailed: string,
 		cards: {
 			detail: string,
 			card: string
 		}[],
-		drawPrompt: string
+		drawPrompt: string,
 	}
 }
 
@@ -77,8 +77,8 @@ export function DrawCardPage() {
 			})),
 			outputFormat: {
 				data: {
-					title: 'string(not null) -> um titulo para a resposta',
-					resume: "string(not null) -> um resumo curto das cartas e o que elas representam de acordo com a pergunta do usuario",
+					archetype: 'string(not null) -> um nome para a resposta, como um novo arquetipo que representa a combinação de cartas',
+					resume: "string(not null) -> um resumo curto das cartas e o que elas representam de acordo com a pergunta do usuario, deve ser uma resposta direta ao que o usuario perguntou, deve ser uma resposta curta e direta, sem detalhes adicionais",
 					detailed: "string(not null) -> uma definição completa das cartas e o que elas representam de acordo com a pergunta do usuario",
 					cards: [
 						{
@@ -86,8 +86,8 @@ export function DrawCardPage() {
 							detail: "string(not null) -> o que a carta representa de acordo com a pergunta do usuario"
 						}
 					],
-					drawPrompt: 'string(not null) -> uma descrição detalhada para gerar uma imagem da combinação de cartas(EM INGLES), não cite o nome das cartas, crie um nome para essa carta composta, instrua o modelo a usar o nome que você deu para a carta'
-				}
+					drawPrompt: 'string(not null) -> uma descrição detalhada para gerar uma imagem da combinação de cartas(EM INGLES), não cite o nome das cartas, instrua o modelo a usar o {archetype} que você deu para a carta'
+				} as ITarotResponse["data"]
 			}
 		}
 
@@ -118,7 +118,7 @@ export function DrawCardPage() {
 		setAiImageLoading(true)
 		ai.models.generateImages({
 			model: import.meta.env.VITE_GEMINI_MODEL_IMAGE ?? "imagen-4.0-generate-001",
-			prompt: `Generate a single card. The image must resemble this: '${aiText.drawPrompt}'. The artstyle should be similar to classic tarot cards but without any words and no roman numeral, with intricate details and vibrant colors. The card should have a mystical and enchanting atmosphere, with symbolic elements that evoke a sense of wonder and spirituality. The composition should be balanced and harmonious, drawing the viewer's eye to the central figure or symbol on the card. Use a rich color palette with deep blues, purples, and golds to create a sense of depth and richness. The overall style should be reminiscent of traditional tarot card illustrations, with a modern twist that makes it visually striking and unique.`,
+			prompt: `'${aiText.drawPrompt}'. The artstyle should be similar to classic tarot cards, with intricate details and vibrant colors, the archetype number is "XXX"(30)`,
 			config: {
 				numberOfImages: 1,
 				imageSize: "1k",
@@ -186,7 +186,7 @@ export function DrawCardPage() {
 								        onClick={requestAiDefinition}
 								        loading={aiLoading}>Solicitar definição de IA (Gemini)
 								</Button>
-								<Button disabled={aiText == null}
+								<Button disabled={aiText == null || aiImage != null}
 								        loading={aiImageLoading}
 								        endIcon={<AutoAwesome/>}
 								        onClick={requestAiImage}>Imagem por IA</Button>
@@ -198,9 +198,9 @@ export function DrawCardPage() {
 				{aiText != null && <Grid size={12} container my={1}>
 					<Grid size={12}>
 						<Typography>Definição por IA:</Typography>
-						<Typography variant={"h6"} mt={1}>{aiText.title}</Typography>
+						<Typography variant={"h6"} mt={1}>{aiText.archetype}</Typography>
 						{aiImage != null && <Grid size={12} justifyContent={'center'} container>
-							{aiText.drawPrompt}
+							{/*{aiText.drawPrompt}*/}
 							<img width={`35%`} src={aiImage} alt={"AI Generated Tarot Card"}/>
 						</Grid>}
 						<Accordion>
