@@ -12,7 +12,7 @@ import {useEffect, useState} from "react";
 import type {ICard} from "../models/ICard.ts";
 import {CardComponent} from "../components/CardComponent.tsx";
 import {GoogleGenAI} from "@google/genai";
-import {AddCard, Assistant} from "@mui/icons-material";
+import {AddCard, Assistant, AutoAwesome} from "@mui/icons-material";
 
 type ITarotResponse = {
 	data: {
@@ -22,7 +22,8 @@ type ITarotResponse = {
 		cards: {
 			detail: string,
 			card: string
-		}[]
+		}[],
+		drawPrompt: string
 	}
 }
 
@@ -84,7 +85,8 @@ export function DrawCardPage() {
 							card: "string(not null) -> nome da carta, caso esteja invertido adicione '(invertido)'",
 							detail: "string(not null) -> o que a carta representa de acordo com a pergunta do usuario"
 						}
-					]
+					],
+					drawPrompt: 'string(not null) -> uma descrição detalhada para gerar uma imagem da combinação de cartas(EM INGLES), não cite o nome das cartas, crie um nome para essa carta composta, instrua o modelo a usar o nome que você deu para a carta'
 				}
 			}
 		}
@@ -95,7 +97,7 @@ export function DrawCardPage() {
 				parts: [{
 					text: `O usuario está tentando descobrir o significado de um conjunto de cartas de tarot você deve ler o json a seguir para modelar a resposta`
 				},
-					{text: JSON.stringify(requestContent, null, 2)},
+					{text: JSON.stringify(requestContent, null, 0)},
 					{text: `A resposta deve ser em json com apenas uma linha, não faça o beautify do json`},
 				]
 			}],
@@ -103,7 +105,8 @@ export function DrawCardPage() {
 				temperature: 0.35,
 			}
 		}).then(x => {
-			const parsed = JSON.parse(x.text ?? "") as ITarotResponse
+			const txt = x.text?.replace('\n', '').replace('```json', '').replace('```', '')
+			const parsed = JSON.parse(txt ?? "") as ITarotResponse
 			setAiText(parsed.data ?? null)
 		}).finally(() => {
 			setAiLoading(false)
@@ -115,7 +118,7 @@ export function DrawCardPage() {
 		setAiImageLoading(true)
 		ai.models.generateImages({
 			model: import.meta.env.VITE_GEMINI_MODEL_IMAGE ?? "imagen-4.0-generate-001",
-			prompt: `Generate a single card, no texts, no words. The image must resemble this title: '${aiText.title} - ${aiText.resume}'. The artstyle should be similar to classic tarot cards, with intricate details and vibrant colors.`,
+			prompt: `Generate a single card. The image must resemble this: '${aiText.drawPrompt}'. The artstyle should be similar to classic tarot cards but without any words and no roman numeral, with intricate details and vibrant colors. The card should have a mystical and enchanting atmosphere, with symbolic elements that evoke a sense of wonder and spirituality. The composition should be balanced and harmonious, drawing the viewer's eye to the central figure or symbol on the card. Use a rich color palette with deep blues, purples, and golds to create a sense of depth and richness. The overall style should be reminiscent of traditional tarot card illustrations, with a modern twist that makes it visually striking and unique.`,
 			config: {
 				numberOfImages: 1,
 				imageSize: "1k",
@@ -144,46 +147,49 @@ export function DrawCardPage() {
 			<Grid container>
 				<Grid size={12}>
 					<Grid container rowSpacing={1.5}>
-						<Grid container size={12} component={ButtonGroup}>
-							<Grid size={'grow'}>
+						<Grid container size={12} spacing={1}>
+							<Grid size={{xs: 12, md: 8}}>
 								<TextField fullWidth value={questao} onChange={e => setQuestao(e.target.value)}
 								           label={"Questao/Pergunta"}/>
 							</Grid>
-							<Grid size={{sm: 0.05, xs: 0}}/>
-							<Grid size={{sm: 2, xs: 4}}>
-								<TextField value={count}
-								           type={'number'}
-								           slotProps={{
-									           input: {
-										           sx: {
-											           borderTopRightRadius: 0,
-											           borderBottomRightRadius: 0
+							<Grid container size={{xs: 12, md: 4}} spacing={0} component={ButtonGroup}>
+								<Grid size={{xs: 4, md: 3}}>
+									<TextField value={count}
+									           type={'number'}
+									           slotProps={{
+										           input: {
+											           sx: {
+												           borderTopRightRadius: 0,
+												           borderBottomRightRadius: 0
+											           }
 										           }
-									           }
-								           }}
-								           fullWidth
-								           onChange={e => setCount(Math.max(Math.min(parseInt(e.target.value), 7), 1))}
-								           label={"Cartas"}/>
-							</Grid>
-							<Grid size={{sm: 2, xs: 8}}>
-								<Button size={'small'} variant={'outlined'}
-								        fullWidth
-								        sx={{height: '100%'}}
-								        endIcon={<AddCard/>}
-								        onClick={handleGiro}>
-									Girar Carta(s)
-								</Button>
+									           }}
+									           fullWidth
+									           onChange={e => setCount(Math.max(Math.min(parseInt(e.target.value), 7), 1))}
+									           label={"Cartas"}/>
+								</Grid>
+								<Grid size={{xs: 8, md: 9}}>
+									<Button size={'small'} variant={'outlined'}
+									        fullWidth
+									        sx={{height: '100%'}}
+									        endIcon={<AddCard/>}
+									        onClick={handleGiro}>
+										Girar Carta(s)
+									</Button>
+								</Grid>
 							</Grid>
 						</Grid>
-						<Grid size={12}>
+						<Grid size={12} container>
 							<Grid component={ButtonGroup} size={12}>
 								<Button disabled={myCards.length == 0} endIcon={<Assistant/>}
 								        fullWidth variant={'outlined'}
 								        onClick={requestAiDefinition}
-								        loading={aiLoading}>Solicitar
-									definição de IA (Gemini)</Button>
-								<Button disabled={aiText == null} loading={aiImageLoading} onClick={requestAiImage}>Imagem
-									por IA</Button>
+								        loading={aiLoading}>Solicitar definição de IA (Gemini)
+								</Button>
+								<Button disabled={aiText == null}
+								        loading={aiImageLoading}
+								        endIcon={<AutoAwesome/>}
+								        onClick={requestAiImage}>Imagem por IA</Button>
 							</Grid>
 						</Grid>
 					</Grid>
@@ -194,6 +200,7 @@ export function DrawCardPage() {
 						<Typography>Definição por IA:</Typography>
 						<Typography variant={"h6"} mt={1}>{aiText.title}</Typography>
 						{aiImage != null && <Grid size={12} justifyContent={'center'} container>
+							{aiText.drawPrompt}
 							<img width={`35%`} src={aiImage} alt={"AI Generated Tarot Card"}/>
 						</Grid>}
 						<Accordion>
