@@ -33,13 +33,15 @@ export function DrawCardPage() {
 	const [myCards, setMyCards] = useState<ICard[]>([]);
 	const [questao, setQuestao] = useState("");
 	const [count, setCount] = useState(3);
-	const [aiText, setAiText] = useState<ITarotResponse["data"] | null>(null);
+	const [aiGeneratedData, setAiGeneratedData] = useState<ITarotResponse["data"] | null>(null);
 	const [aiLoading, setAiLoading] = useState(false);
 	const [aiImageLoading, setAiImageLoading] = useState(false);
 	const [aiImage, setAiImage] = useState<string | null>(null);
 	const ai = new GoogleGenAI({apiKey: import.meta.env.VITE_GEMINI_API_KEY});
 
 	const handleGiro = () => {
+		setAiImage(null)
+		setAiGeneratedData(null)
 		setMyCards([]);
 		const cardsDisponiveis = [...cards];
 		for (let i = 0; i < count; i++) {
@@ -66,7 +68,7 @@ export function DrawCardPage() {
 	};
 
 	const requestAiDefinition = () => {
-		setAiText(null)
+		setAiGeneratedData(null)
 		setAiImage(null)
 		setAiLoading(true)
 		const requestContent = {
@@ -107,22 +109,20 @@ export function DrawCardPage() {
 		}).then(x => {
 			const txt = x.text?.replace('\n', '').replace('```json', '').replace('```', '')
 			const parsed = JSON.parse(txt ?? "") as ITarotResponse
-			setAiText(parsed.data ?? null)
+			setAiGeneratedData(parsed.data ?? null)
 		}).finally(() => {
 			setAiLoading(false)
 
 		})
 	}
 	const requestAiImage = () => {
-		if (aiText == null) return;
+		if (aiGeneratedData == null) return;
 		setAiImageLoading(true)
 		ai.models.generateImages({
 			model: import.meta.env.VITE_GEMINI_MODEL_IMAGE ?? "imagen-4.0-generate-001",
-			prompt: `'${aiText.drawPrompt}'. The artstyle should be similar to classic tarot cards, with intricate details and vibrant colors, the archetype number is "XXX"(30)`,
+			prompt: `'${aiGeneratedData.drawPrompt}'. The artstyle should be similar to classic tarot cards, with intricate details and vibrant colors, the archetype number is "XXX"(30)`,
 			config: {
 				numberOfImages: 1,
-				imageSize: "1k",
-				outputCompressionQuality: 40,
 				aspectRatio: "3:4",
 			}
 		}).then(x => {
@@ -139,8 +139,20 @@ export function DrawCardPage() {
 
 	useEffect(() => {
 		import('../cards/arcanosMaiores.json').then(x => setCards(x.default))
-	}, []);
 
+		// ai.models.list({
+		// 	config: {
+		// 		pageSize: 100
+		// 	}
+		// }).then(x => {
+		// 	for (let i = 0; i < x.pageLength; i++) {
+		// 		const curr = x.getItem(i);
+		//
+		// 		if (curr.name == 'models/' + import.meta.env.VITE_GEMINI_MODEL_IMAGE) {
+		// 		}
+		// 	}
+		// })
+	}, []);
 
 	return (
 		<Grid size={12}>
@@ -181,12 +193,12 @@ export function DrawCardPage() {
 						</Grid>
 						<Grid size={12} container>
 							<Grid component={ButtonGroup} size={12}>
-								<Button disabled={myCards.length == 0} endIcon={<Assistant/>}
+								<Button disabled={myCards.length == 0 || aiGeneratedData != null} endIcon={<Assistant/>}
 								        fullWidth variant={'outlined'}
 								        onClick={requestAiDefinition}
 								        loading={aiLoading}>Solicitar definição de IA (Gemini)
 								</Button>
-								<Button disabled={aiText == null || aiImage != null}
+								<Button disabled={aiGeneratedData == null || aiImage != null}
 								        loading={aiImageLoading}
 								        endIcon={<AutoAwesome/>}
 								        onClick={requestAiImage}>Imagem por IA</Button>
@@ -195,23 +207,23 @@ export function DrawCardPage() {
 					</Grid>
 
 				</Grid>
-				{aiText != null && <Grid size={12} container my={1}>
+				{aiGeneratedData != null && <Grid size={12} container my={1}>
 					<Grid size={12}>
 						<Typography>Definição por IA:</Typography>
-						<Typography variant={"h6"} mt={1}>{aiText.archetype}</Typography>
+						<Typography variant={"h6"} mt={1}>{aiGeneratedData.archetype}</Typography>
 						{aiImage != null && <Grid size={12} justifyContent={'center'} container>
 							{/*{aiText.drawPrompt}*/}
 							<img width={`35%`} src={aiImage} alt={"AI Generated Tarot Card"}/>
 						</Grid>}
 						<Accordion>
 							<AccordionSummary>Resposta detalhada</AccordionSummary>
-							<AccordionDetails>{aiText.detailed}</AccordionDetails>
+							<AccordionDetails>{aiGeneratedData.detailed}</AccordionDetails>
 						</Accordion>
 						<Accordion>
 							<AccordionSummary>Resumo</AccordionSummary>
-							<AccordionDetails>{aiText.resume}</AccordionDetails>
+							<AccordionDetails>{aiGeneratedData.resume}</AccordionDetails>
 						</Accordion>
-						{aiText.cards.map((cardAi) => (
+						{aiGeneratedData.cards.map((cardAi) => (
 							<Accordion>
 								<AccordionSummary>{cardAi.card}</AccordionSummary>
 								<AccordionDetails>{cardAi.detail}</AccordionDetails>
