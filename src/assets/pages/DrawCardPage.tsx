@@ -28,6 +28,16 @@ type ITarotResponse = {
 }
 
 
+const base64ToBlob = (base64: string) => {
+	// Decode the base64 string to binary data
+	const binary = atob(base64);
+	const array = [];
+	for (let i = 0; i < binary.length; i++) {
+		array.push(binary.charCodeAt(i));
+	}
+	return new Blob([new Uint8Array(array)], {type: 'image/png'});
+};
+
 export function DrawCardPage() {
 	const [cards, setCards] = useState<ICard[]>([]);
 	const [myCards, setMyCards] = useState<ICard[]>([]);
@@ -38,6 +48,11 @@ export function DrawCardPage() {
 	const [aiImageLoading, setAiImageLoading] = useState(false);
 	const [aiImage, setAiImage] = useState<string | null>(null);
 	const ai = new GoogleGenAI({apiKey: import.meta.env.VITE_GEMINI_API_KEY});
+	useEffect(() => {
+		ai.models.list({config: {
+			pageSize: 1000
+			}}).then(console.log)
+	}, [ai]);
 
 	const handleGiro = () => {
 		setAiImage(null)
@@ -56,16 +71,6 @@ export function DrawCardPage() {
 			setMyCards(x => [...x, cardSelecionada]);
 		}
 	}
-
-	const base64ToBlob = (base64: string) => {
-		// Decode the base64 string to binary data
-		const binary = atob(base64);
-		const array = [];
-		for (let i = 0; i < binary.length; i++) {
-			array.push(binary.charCodeAt(i));
-		}
-		return new Blob([new Uint8Array(array)], {type: 'image/png'});
-	};
 
 	const requestAiDefinition = () => {
 		setAiGeneratedData(null)
@@ -118,22 +123,67 @@ export function DrawCardPage() {
 	const requestAiImage = () => {
 		if (aiGeneratedData == null) return;
 		setAiImageLoading(true)
-		ai.models.generateImages({
-			model: import.meta.env.VITE_GEMINI_MODEL_IMAGE ?? "imagen-4.0-generate-001",
-			prompt: `'${aiGeneratedData.drawPrompt}'. The artstyle should be similar to classic tarot cards, with intricate details and vibrant colors, the archetype number is "XXX"(30)`,
-			config: {
-				numberOfImages: 1,
-				aspectRatio: "3:4",
-			}
-		}).then(x => {
-			if (x.generatedImages != null && x.generatedImages.length > 0) {
-				const i = x.generatedImages[0].image
-				if (i == null || i.imageBytes == null) return;
-				const blob = base64ToBlob(i.imageBytes);
-				const url = URL.createObjectURL(blob);
-				setAiImage(url);
-			}
-		}).finally(() => setAiImageLoading(false))
+		const model = import.meta.env.VITE_GEMINI_MODEL_IMAGE ?? "imagen-4.0-generate-001";
+		const prompt = `'${aiGeneratedData.drawPrompt}'. The artstyle should be similar to classic tarot cards, with intricate details and vibrant colors, the archetype number is "XXX"(30)`;
+
+		const fallbackToPollinations = () => {
+			console.warn("Using Pollinations AI fallback for image generation.");
+			const randomSeed = Math.floor(Math.random() * 1000000);
+			const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=600&height=800&nologo=true&seed=${randomSeed}`;
+			setAiImage(url);
+		};
+
+		const isGeminiImageModel = model.startsWith("gemini-") || model.includes("banana") || model.includes("image");
+
+		if (isGeminiImageModel) {
+			ai.models.generateContent({
+				model: model,
+				contents: prompt,
+			}).then(response => {
+				const candidate = response.candidates?.[0];
+				const parts = candidate?.content?.parts || [];
+				let imageFound = false;
+				for (const part of parts) {
+					if (part.inlineData && typeof part.inlineData.data === 'string') {
+						const blob = base64ToBlob(part.inlineData.data);
+						const url = URL.createObjectURL(blob);
+						setAiImage(url);
+						imageFound = true;
+						break;
+					}
+				}
+				if (!imageFound) {
+					throw new Error("No image data found in response parts.");
+				}
+			}).catch(err => {
+				console.error("Gemini Image generation (generateContent) failed:", err);
+				fallbackToPollinations();
+			}).finally(() => setAiImageLoading(false));
+		} else {
+			ai.models.generateImages({
+				model: model,
+				prompt: prompt,
+				config: {
+					numberOfImages: 1,
+					aspectRatio: "3:4",
+				}
+			}).then(x => {
+				if (x.generatedImages != null && x.generatedImages.length > 0) {
+					const i = x.generatedImages[0].image
+					if (i == null || i.imageBytes == null) {
+						throw new Error("Invalid image structure returned.");
+					}
+					const blob = base64ToBlob(i.imageBytes);
+					const url = URL.createObjectURL(blob);
+					setAiImage(url);
+				} else {
+					throw new Error("No generated images returned.");
+				}
+			}).catch(err => {
+				console.error("Gemini Image generation (generateImages) failed:", err);
+				fallbackToPollinations();
+			}).finally(() => setAiImageLoading(false))
+		}
 	}
 
 
