@@ -1,0 +1,106 @@
+[
+  {
+    "numero": 1,
+    "nome": "Gengar",
+    "descricao": "Simboliza a sombra, a ilusão, a astúcia, o mistério e a capacidade de se mover pelas sombras com alegria travessa. Representa o lado oculto da psique e a maestria sobre os medos noturnos.",
+    "descricao_invertida": "Indica paranoias infundadas, medo da própria sombra, travessuras maliciosas, ilusões enganosas ou a necessidade de encarar segredos ocultos.",
+    "interpretacao": "Gengar te convida a abraçar seu lado misterioso, usar o bom humor para desarmar a escuridão e não temer o desconhecido. Invertido, alerta contra ilusões e manipulações sutis.",
+    "imagem": "/img/pokemon/gengar.jpg"
+  },
+  {
+    "numero": 2,
+    "nome": "Mimikyu",
+    "descricao": "Representa o desejo profundo de aceitação, a busca por amor sob um disfarce protetor e a força da vulnerabilidade oculta. Ensina sobre a jornada de entender a verdadeira identidade.",
+    "descricao_invertida": "Indica a dor de esconder quem você é, inveja tóxica, revelação dolorosa da máscara, ressentimento acumulado ou falta de autoestima.",
+    "interpretacao": "Mimikyu te convida a refletir sobre a necessidade de ser amado por quem você é por dentro, em vez de depender de aparências. Invertido, alerta sobre o risco de se perder tentando agradar aos outros.",
+    "imagem": "/img/pokemon/mimikyu.jpg"
+  },
+  {
+    "numero": 3,
+    "nome": "Pikachu",
+    "descricao": "Simboliza a faísca da vitalidade, inspiração eletrizante, energia renovada, amizade leal e entusiasmo radiante. Traz a força do trovão e a alegria pura dos novos começos.",
+    "descricao_invertida": "Indica esgotamento elétrico (burnout), raiva impulsiva, falta de energia, impaciência ou faíscas descontroladas de ansiedade e estresse.",
+    "interpretacao": "Pikachu encoraja você a acender sua energia interior, agir com paixão e confiar na força das suas conexões genuínas. Invertido, chama a atenção para o desgaste emocional e a necessidade de recarregar as baterias.",
+    "imagem": "/img/pokemon/pikachu.jpg"
+  },
+  {
+    "numero": 4,
+    "nome": "Charizard",
+    "descricao": "Representa o Imperador do fogo, a paixão ardente, a força de vontade inabalável, a coragem para voar alto e o poder de superar grandes provações através da transformação.",
+    "descricao_invertida": "Indica fúria descontrolada, orgulho excessivo, temperamento explosivo, impulsividade destrutiva ou o risco de se queimar pelo próprio ego.",
+    "interpretacao": "Charizard te convida a assumir sua força interior, lutar com bravura pelos seus sonhos e dominar a chama do seu propósito. Invertido, alerta para ter cuidado com o excesso de agressividade e dominar o fogo das emoções.",
+    "imagem": "/img/pokemon/charizard.jpg"
+  },
+  {
+    "numero": 5,
+    "nome": "Umbreon",
+    "descricao": "Simboliza a energia da Lua, a intuição aguçada, a proteção espiritual nas horas mais sombrias, a sabedoria silenciosa e a beleza que brilha no escuro.",
+    "descricao_invertida": "Indica isolamento excessivo, desconfiança paranoica, medo de caminhar sozinho na escuridão ou intuição bloqueada por inseguranças.",
+    "interpretacao": "Umbreon te convida a confiar na sua luz interior mesmo quando tudo ao redor parece incerto. É a carta da serenidade, proteção e intuição. Invertido, alerta sobre a tendência a se fechar demais para o mundo.",
+    "imagem": "/img/pokemon/umbreon.jpg"
+  },
+  {
+    "numero": 6,
+    "nome": "Mewtwo",
+    "descricao": "Representa o Mago Supremo da mente, o poder psíquico transcendente, a busca profunda por propósito existencial e o questionamento das próprias origens e destino.",
+    "descricao_invertida": "Indica crise existencial, arrogância intelectual, desconexão com os sentimentos, sentimento de alienação ou uso indevido do poder mental.",
+    "interpretacao": "Mewtwo chama você a dominar seus pensamentos, buscar respostas profundas e reconhecer que você é o criador do seu próprio destino. Invertido, alerta sobre o risco de intelectualizar demais as emoções ou se isolar dos outros.",
+    "imagem": "/img/pokemon/mewtwo.jpg"
+  },
+  {
+    "numero": 7,
+    "nome": "Gardevoir",
+    "descricao": "Simboliza a Sacerdotisa e a Guardiã Divina, empatia incondicional, intuição espiritual pura, graça e o compromisso sagrado de proteger o que é precioso.",
+    "descricao_invertida": "Indica esgotamento por se doar demais aos outros, dependência emocional, intuição suprimida ou sacrifício desnecessário da própria saúde.",
+    "interpretacao": "Gardevoir te chama a ouvir seu coração, cultivar a compaixão e confiar no seu sexto sentido. Invertida, alerta sobre a importância de impor limites e cuidar de si mesma em primeiro lugar.",
+    "imagem": "/img/pokemon/gardevoir.jpg"
+  },
+  {
+    "numero": 8,
+    "nome": "Lucario",
+    "descricao": "Representa a Força Interior e a Justiça da Aura, disciplina mental, clareza moral, percepção das intenções alheias e a bravura de um guerreiro honrado.",
+    "descricao_invertida": "Indica julgamento precipitado, rigidez excessiva, conflitos de ego, dificuldade de lidar com críticas ou bloqueio da percepção intuitiva.",
+    "interpretacao": "Lucario te convida a agir com integridade, alinhar suas ações com seus valores e encarar os desafios com coragem inabalável. Invertido, alerta contra a intransigência e o julgamento alheio.",
+    "imagem": "/img/pokemon/lucario.jpg"
+  },
+  {
+    "numero": 9,
+    "nome": "Snorlax",
+    "descricao": "Simboliza o Eremita do Descanso e a Temperança, paz de espírito, nutrição, desapego das pressões externas e a sabedoria de saber quando fazer uma pausa regeneradora.",
+    "descricao_invertida": "Indica preguiça crônica, procrastinação excessiva, estagnação, fuga dos problemas através do sono ou recusa em encarar a realidade.",
+    "interpretacao": "Snorlax te aconselha a desacelerar, desfrutar dos prazeres simples da vida e recarregar suas energias com paciência. Invertido, alerta que a pausa prolongada virou estagnação e é hora de se movimentar.",
+    "imagem": "/img/pokemon/snorlax.jpg"
+  },
+  {
+    "numero": 10,
+    "nome": "Eevee",
+    "descricao": "Representa a Roda da Fortuna e o Potencial Infinito, adaptabilidade diante das mudanças, múltiplos caminhos a escolher e a empolgação da evolução pessoal.",
+    "descricao_invertida": "Indica indecisão paralisante, medo de crescer, resistência às mudanças inevitáveis ou falta de direção clara sobre o próprio futuro.",
+    "interpretacao": "Eevee te lembra que seu futuro está aberto a infinitas possibilidades e que você tem a capacidade de se adaptar a qualquer caminho que escolher. Invertido, alerta sobre o receio de assumir uma escolha firme.",
+    "imagem": "/img/pokemon/eevee.jpg"
+  },
+  {
+    "numero": 11,
+    "nome": "Psyduck",
+    "descricao": "Simboliza o Enforcado e a Revelação Inconsciente, o aprendizado através da vulnerabilidade, a pressão que gera clareza e a sabedoria que surge quando soltamos o controle rígido.",
+    "descricao_invertida": "Indica sobrecarga mental, estresse acumulado, negação da própria intuição, dores de cabeça por pensamentos em loop ou drama desnecessário.",
+    "interpretacao": "Psyduck mostra que os momentos de dúvida e confusão muitas vezes escondem grandes insights. Confie no processo e pare de resistir aos seus pensamentos. Invertido, pede calma para aliviar a ansiedade.",
+    "imagem": "/img/pokemon/psyduck.jpg"
+  },
+  {
+    "numero": 12,
+    "nome": "Alakazam",
+    "descricao": "Representa o Mago do Conhecimento e a Clareza Suprema, maestria intelectual, estratégia, raciocínio rápido e a capacidade de resolver problemas complexos com sabedoria.",
+    "descricao_invertida": "Indica excesso de racionalização, manipulação fria, desdém pela intuição ou paralisia por excesso de análise.",
+    "interpretacao": "Alakazam te convida a usar sua inteligência e habilidades para estruturar soluções brilhantes. Invertido, lembra que nem tudo pode ser resolvido apenas com a lógica; a emoção também precisa ser ouvida.",
+    "imagem": "/img/pokemon/alakazam.jpg"
+  },
+  {
+    "numero": 13,
+    "nome": "Dragonite",
+    "descricao": "Simboliza A Estrela e O Mundo, esperança que guia nas tempestades, generosidade calorosa, superação dos oceanos da vida e a realização dos grandes sonhos.",
+    "descricao_invertida": "Indica ingenuidade, promessas irrealistas, medo de tempestades emocionais ou desapontamento por expectativas irrealistas.",
+    "interpretacao": "Dragonite traz uma mensagem de otimismo, gentileza e triunfo sobre os momentos difíceis. Siga a estrela da sua esperança. Invertido, pede pés no chão para não se desiludir.",
+    "imagem": "/img/pokemon/dragonite.jpg"
+  }
+]

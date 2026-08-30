@@ -4,15 +4,20 @@ import {
 	AccordionSummary,
 	Button,
 	ButtonGroup,
+	FormControl,
 	Grid,
+	InputLabel,
+	MenuItem,
+	Select,
 	TextField,
 	Typography
 } from "@mui/material";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import type {ICard} from "../models/ICard.ts";
 import {CardComponent} from "../components/CardComponent.tsx";
 import {GoogleGenAI} from "@google/genai";
 import {AddCard, Assistant, AutoAwesome} from "@mui/icons-material";
+import {DECKS, getDeckById} from "../cards/decks.ts";
 
 type ITarotResponse = {
 	data: {
@@ -27,9 +32,7 @@ type ITarotResponse = {
 	}
 }
 
-
 const base64ToBlob = (base64: string) => {
-	// Decode the base64 string to binary data
 	const binary = atob(base64);
 	const array = [];
 	for (let i = 0; i < binary.length; i++) {
@@ -39,7 +42,10 @@ const base64ToBlob = (base64: string) => {
 };
 
 export function DrawCardPage() {
-	const [cards, setCards] = useState<ICard[]>([]);
+	const [selectedDeckId, setSelectedDeckId] = useState<string>("arcanos-maiores");
+	const selectedDeck = getDeckById(selectedDeckId);
+	const cards = selectedDeck.cards;
+
 	const [myCards, setMyCards] = useState<ICard[]>([]);
 	const [questao, setQuestao] = useState("");
 	const [count, setCount] = useState(3);
@@ -47,19 +53,32 @@ export function DrawCardPage() {
 	const [aiLoading, setAiLoading] = useState(false);
 	const [aiImageLoading, setAiImageLoading] = useState(false);
 	const [aiImage, setAiImage] = useState<string | null>(null);
-	const ai = new GoogleGenAI({apiKey: import.meta.env.VITE_GEMINI_API_KEY});
+	const ai = useMemo(() => new GoogleGenAI({apiKey: import.meta.env.VITE_GEMINI_API_KEY}), []);
+
 	useEffect(() => {
 		ai.models.list({config: {
 			pageSize: 1000
-			}}).then(console.log)
+		}}).then(console.log);
 	}, [ai]);
 
+	const handleDeckChange = (deckId: string) => {
+		setSelectedDeckId(deckId);
+		setMyCards([]);
+		setAiGeneratedData(null);
+		setAiImage(null);
+		const newDeck = getDeckById(deckId);
+		if (count > newDeck.cards.length) {
+			setCount(newDeck.cards.length);
+		}
+	};
+
 	const handleGiro = () => {
-		setAiImage(null)
-		setAiGeneratedData(null)
+		setAiImage(null);
+		setAiGeneratedData(null);
 		setMyCards([]);
 		const cardsDisponiveis = [...cards];
-		for (let i = 0; i < count; i++) {
+		const numToDraw = Math.min(count, cardsDisponiveis.length);
+		for (let i = 0; i < numToDraw; i++) {
 			const randomIndex = Math.floor(Math.random() * cardsDisponiveis.length);
 			const card = cardsDisponiveis[randomIndex];
 			const invertido = Math.random() < 0.5;
@@ -70,13 +89,14 @@ export function DrawCardPage() {
 			cardsDisponiveis.splice(randomIndex, 1);
 			setMyCards(x => [...x, cardSelecionada]);
 		}
-	}
+	};
 
 	const requestAiDefinition = () => {
-		setAiGeneratedData(null)
-		setAiImage(null)
-		setAiLoading(true)
+		setAiGeneratedData(null);
+		setAiImage(null);
+		setAiLoading(true);
 		const requestContent = {
+			deck: selectedDeck.nome,
 			question: questao,
 			cards: myCards.map(x => ({
 				name: x.nome,
@@ -96,13 +116,13 @@ export function DrawCardPage() {
 					drawPrompt: 'string(not null) -> uma descrição detalhada para gerar uma imagem da combinação de cartas(EM INGLES), não cite o nome das cartas, instrua o modelo a usar o {archetype} que você deu para a carta'
 				} as ITarotResponse["data"]
 			}
-		}
+		};
 
 		ai.models.generateContent({
 			model: import.meta.env.VITE_GEMINI_MODEL_TEXT ?? "gemini-2.5-flash-lite",
 			contents: [{
 				parts: [{
-					text: `O usuario está tentando descobrir o significado de um conjunto de cartas de tarot você deve ler o json a seguir para modelar a resposta`
+					text: `O usuario está tentando descobrir o significado de um conjunto de cartas do baralho (${selectedDeck.nome}). Você deve ler o json a seguir para modelar a resposta:`
 				},
 					{text: JSON.stringify(requestContent, null, 0)},
 					{text: `A resposta deve ser em json com apenas uma linha, não faça o beautify do json`},
@@ -112,17 +132,17 @@ export function DrawCardPage() {
 				temperature: 0.35,
 			}
 		}).then(x => {
-			const txt = x.text?.replace('\n', '').replace('```json', '').replace('```', '')
-			const parsed = JSON.parse(txt ?? "") as ITarotResponse
-			setAiGeneratedData(parsed.data ?? null)
+			const txt = x.text?.replace('\n', '').replace('```json', '').replace('```', '');
+			const parsed = JSON.parse(txt ?? "") as ITarotResponse;
+			setAiGeneratedData(parsed.data ?? null);
 		}).finally(() => {
-			setAiLoading(false)
+			setAiLoading(false);
+		});
+	};
 
-		})
-	}
 	const requestAiImage = () => {
 		if (aiGeneratedData == null) return;
-		setAiImageLoading(true)
+		setAiImageLoading(true);
 		const model = import.meta.env.VITE_GEMINI_MODEL_IMAGE ?? "imagen-4.0-generate-001";
 		const prompt = `'${aiGeneratedData.drawPrompt}'. The artstyle should be similar to classic tarot cards, with intricate details and vibrant colors, the archetype number is "XXX"(30)`;
 
@@ -169,7 +189,7 @@ export function DrawCardPage() {
 				}
 			}).then(x => {
 				if (x.generatedImages != null && x.generatedImages.length > 0) {
-					const i = x.generatedImages[0].image
+					const i = x.generatedImages[0].image;
 					if (i == null || i.imageBytes == null) {
 						throw new Error("Invalid image structure returned.");
 					}
@@ -182,27 +202,9 @@ export function DrawCardPage() {
 			}).catch(err => {
 				console.error("Gemini Image generation (generateImages) failed:", err);
 				fallbackToPollinations();
-			}).finally(() => setAiImageLoading(false))
+			}).finally(() => setAiImageLoading(false));
 		}
-	}
-
-
-	useEffect(() => {
-		import('../cards/arcanosMaiores.json').then(x => setCards(x.default))
-
-		// ai.models.list({
-		// 	config: {
-		// 		pageSize: 100
-		// 	}
-		// }).then(x => {
-		// 	for (let i = 0; i < x.pageLength; i++) {
-		// 		const curr = x.getItem(i);
-		//
-		// 		if (curr.name == 'models/' + import.meta.env.VITE_GEMINI_MODEL_IMAGE) {
-		// 		}
-		// 	}
-		// })
-	}, []);
+	};
 
 	return (
 		<Grid size={12}>
@@ -210,9 +212,26 @@ export function DrawCardPage() {
 				<Grid size={12}>
 					<Grid container rowSpacing={1.5}>
 						<Grid container size={12} spacing={1}>
-							<Grid size={{xs: 12, md: 8}}>
+							<Grid size={{xs: 12, md: 5}}>
 								<TextField fullWidth value={questao} onChange={e => setQuestao(e.target.value)}
 								           label={"Questao/Pergunta"}/>
+							</Grid>
+							<Grid size={{xs: 12, md: 3}}>
+								<FormControl fullWidth>
+									<InputLabel id="deck-select-label">Baralho</InputLabel>
+									<Select
+										labelId="deck-select-label"
+										value={selectedDeckId}
+										label="Baralho"
+										onChange={e => handleDeckChange(e.target.value)}
+									>
+										{DECKS.map((deck) => (
+											<MenuItem key={deck.id} value={deck.id}>
+												{deck.nome} ({deck.cards.length} cartas)
+											</MenuItem>
+										))}
+									</Select>
+								</FormControl>
 							</Grid>
 							<Grid container size={{xs: 12, md: 4}} spacing={0} component={ButtonGroup}>
 								<Grid size={{xs: 4, md: 3}}>
@@ -227,7 +246,7 @@ export function DrawCardPage() {
 										           }
 									           }}
 									           fullWidth
-									           onChange={e => setCount(Math.max(Math.min(parseInt(e.target.value), 7), 1))}
+									           onChange={e => setCount(Math.max(Math.min(parseInt(e.target.value) || 1, cards.length), 1))}
 									           label={"Cartas"}/>
 								</Grid>
 								<Grid size={{xs: 8, md: 9}}>
@@ -262,7 +281,6 @@ export function DrawCardPage() {
 						<Typography>Definição por IA:</Typography>
 						<Typography variant={"h6"} mt={1}>{aiGeneratedData.archetype}</Typography>
 						{aiImage != null && <Grid size={12} justifyContent={'center'} container>
-							{/*{aiText.drawPrompt}*/}
 							<img width={`35%`} src={aiImage} alt={"AI Generated Tarot Card"}/>
 						</Grid>}
 						<Accordion>
@@ -274,7 +292,7 @@ export function DrawCardPage() {
 							<AccordionDetails>{aiGeneratedData.resume}</AccordionDetails>
 						</Accordion>
 						{aiGeneratedData.cards.map((cardAi) => (
-							<Accordion>
+							<Accordion key={cardAi.card}>
 								<AccordionSummary>{cardAi.card}</AccordionSummary>
 								<AccordionDetails>{cardAi.detail}</AccordionDetails>
 							</Accordion>
@@ -293,5 +311,5 @@ export function DrawCardPage() {
 				</Grid>
 			</Grid>
 		</Grid>
-	)
+	);
 }

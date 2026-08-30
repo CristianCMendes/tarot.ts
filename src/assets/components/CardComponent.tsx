@@ -11,12 +11,14 @@ export function CardComponent(props: CardComponentProps) {
     const [img, setImg] = useState<string>();
 
     useEffect(() => {
-        fetch(`/img/${card.numero}.jpg`)
+        const imagePath = card.imagem || `/img/${card.numero}.jpg`;
+        fetch(imagePath)
             .then(x => x.blob())
             .then(x => URL.createObjectURL(x))
-            .then(x => setImg(x));
+            .then(x => setImg(x))
+            .catch(() => setImg(imagePath));
 
-    }, [card.numero]);
+    }, [card.numero, card.imagem]);
 
 
     const invertidoSx = card.invertido ? {

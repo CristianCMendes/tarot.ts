@@ -5,4 +5,5 @@ export interface ICard {
     descricao_invertida: string
     interpretacao: string
     invertido?: boolean
+    imagem?: string
 }
