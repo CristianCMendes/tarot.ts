@@ -56,9 +56,11 @@ export function DrawCardPage() {
 	const ai = useMemo(() => new GoogleGenAI({apiKey: import.meta.env.VITE_GEMINI_API_KEY}), []);
 
 	useEffect(() => {
-		ai.models.list({config: {
-			pageSize: 1000
-		}}).then(console.log);
+		ai.models.list({
+			config: {
+				pageSize: 1000
+			}
+		}).then(console.log);
 	}, [ai]);
 
 	const handleDeckChange = (deckId: string) => {
@@ -276,11 +278,11 @@ export function DrawCardPage() {
 					</Grid>
 
 				</Grid>
-				{aiGeneratedData != null && <Grid size={12} container my={1}>
+				{aiGeneratedData != null && <Grid size={12} container sx={{my: 1}}>
 					<Grid size={12}>
 						<Typography>Definição por IA:</Typography>
-						<Typography variant={"h6"} mt={1}>{aiGeneratedData.archetype}</Typography>
-						{aiImage != null && <Grid size={12} justifyContent={'center'} container>
+						<Typography variant={"h6"} sx={{mt: 1}}>{aiGeneratedData.archetype}</Typography>
+						{aiImage != null && <Grid sx={{justifyContent: 'center'}} size={12} container>
 							<img width={`35%`} src={aiImage} alt={"AI Generated Tarot Card"}/>
 						</Grid>}
 						<Accordion>
@@ -301,7 +303,7 @@ export function DrawCardPage() {
 				</Grid>}
 
 				<Grid size={12}>
-					<Grid container justifyContent={'center'} spacing={2} mt={1}>
+					<Grid container sx={{mt: 1, justifyContent: 'center'}} spacing={2}>
 						{myCards.map((myCard) => (
 							<Grid size={{sm: 4, lg: 3}} key={myCard.nome}>
 								<CardComponent card={myCard}/>
