@@ -11,17 +11,20 @@ export function CardComponent(props: CardComponentProps) {
     const [img, setImg] = useState<string>();
 
     useEffect(() => {
-        const imagePath = card.imagem || `/img/${card.numero}.jpg`;
+        const imagePath = (card.invertido && card.imagem_invertida) 
+            ? card.imagem_invertida 
+            : (card.imagem || `/img/${card.numero}.jpg`);
+            
         fetch(imagePath)
             .then(x => x.blob())
             .then(x => URL.createObjectURL(x))
             .then(x => setImg(x))
             .catch(() => setImg(imagePath));
 
-    }, [card.numero, card.imagem]);
+    }, [card.numero, card.imagem, card.imagem_invertida, card.invertido]);
 
 
-    const invertidoSx = card.invertido ? {
+    const invertidoSx = (card.invertido && !card.imagem_invertida) ? {
         transform: 'rotate(180deg)'
     } : {};
 
